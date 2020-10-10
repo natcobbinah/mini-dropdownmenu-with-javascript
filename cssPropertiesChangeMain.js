@@ -1,8 +1,21 @@
 import {CssElements} from './cssPropertiesChangeModule.js';
 
-const c = new CssElements('modify');
+//sample code logics adapted from online sources and various materials
 
-let divElementNames = c.getcssElementName('cssProperty');
+const c = new CssElements('modify','cssProperty');
+
 let btnPressed = c.getElementId('set');
+let divElementoChangeProp = c._setElementoChangeProp;
+let divElementNames = c._divElementsName;
 
-btnPressed.addEventListener('click',c.setChangestoElement(divElementNames));
+//function to change div properties
+function setChanges(){
+    for(let i=0;i <  divElementNames.length; i++){
+        let cssProperty = divElementNames[i].getAttribute('id');
+        let cssValue = divElementNames[i].value;
+
+        divElementoChangeProp.style[cssProperty] = cssValue;
+    }
+} 
+
+btnPressed.addEventListener('click',setChanges);

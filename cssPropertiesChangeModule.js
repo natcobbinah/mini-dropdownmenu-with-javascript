@@ -1,11 +1,13 @@
 const _setElementoChangeProp = new WeakMap();
+const _divElementsName =new WeakMap();
 
 export class CssElements{
 
-    constructor(value){
-        _setElementoChangeProp.set(this,document.getElementById(value));
+    constructor(divElement,csselementNames){
+        _setElementoChangeProp.set(this,document.getElementById(divElement));
+        _divElementsName.set(this,document.getElementsByName(csselementNames));
     }
-
+ 
     getElementId(value){
         let retrievedId = document.getElementById(value);
         return retrievedId;
@@ -15,13 +17,14 @@ export class CssElements{
         let retrievedName = document.getElementsByName(value);
         return retrievedName;
     }
+    
+    get _setElementoChangeProp(){
+        return _setElementoChangeProp.get(this);
+    }
 
-    setChangestoElement(cssElementsNameArray){
-        for(let i=0; i < cssElementsNameArray.length; i++){
-            let cssProperty = cssElementsNameArray[i].getAttribute('id');
-            let cssValue = cssElementsNameArray[i].value;
-
-            _setElementoChangeProp.style[cssProperty] = cssValue;
-        }
+    get _divElementsName(){
+        return _divElementsName.get(this);
     }
 }
+
+
